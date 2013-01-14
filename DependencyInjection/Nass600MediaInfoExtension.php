@@ -30,5 +30,6 @@ class Nass600MediaInfoExtension extends Extension
 
         $container->setParameter('nass600_media_info.provider.lyrics', $config['provider']['lyrics']);
         $container->setParameter('nass600_media_info.provider.music', $config['provider']['music']);
+        $container->setParameter('nass600_media_info.config', $config['config']);
     }
 }

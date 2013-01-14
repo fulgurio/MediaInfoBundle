@@ -6,15 +6,16 @@
 
 	<parameters>
 		<parameter key="lyrics_manager.class">Nass600\MediaInfoBundle\MediaInfo\Manager\LyricsInfoManager</parameter>
-    <parameter key="music_manager.class">Nass600\MediaInfoBundle\MediaInfo\Manager\MusicInfoManager</parameter>
+		<parameter key="music_manager.class">Nass600\MediaInfoBundle\MediaInfo\Manager\MusicInfoManager</parameter>
 	</parameters>
 
 	<services>
 		<service id="nass600_media_info.lyrics_info.manager" class="%lyrics_manager.class%">
 			<argument key="provider">%nass600_media_info.provider.lyrics%</argument>
 		</service>
-    <service id="nass600_media_info.music_info.manager" class="%music_manager.class%">
-  			<argument key="provider">%nass600_media_info.provider.music%</argument>
-  		</service>
+		<service id="nass600_media_info.music_info.manager" class="%music_manager.class%">
+			<argument key="provider">%nass600_media_info.provider.music%</argument>
+			<argument  type="service" id="service_container"></argument>
+		</service>
 	</services>
 </container>

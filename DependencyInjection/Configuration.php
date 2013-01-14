@@ -19,7 +19,6 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('nass600_media_info');
-
         $rootNode
             ->children()
                 ->arrayNode('provider')
@@ -29,8 +28,16 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('music')->defaultValue('Nass600\MediaInfoBundle\MediaInfo\Adapter\Music\LastFMAdapter')->end()
                     ->end()
                 ->end()
+                ->arrayNode('config')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode('lastFM')
+                            ->children()
+                                ->scalarNode('api_key')->end()
+                            ->end()
+                        ->end()
+                    ->end()
             ->end();
-
         return $treeBuilder;
     }
 }

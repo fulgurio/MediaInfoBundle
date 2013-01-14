@@ -12,6 +12,11 @@ namespace Nass600\MediaInfoBundle\MediaInfo\Adapter;
  */
 class AbstractAdapter
 {
+	/**
+	 * Adapter configuration
+	 * @var unknown_type
+	 */
+	protected $config;
 
 	/**
 	 * Parameters to put in the web service url
@@ -35,22 +40,22 @@ class AbstractAdapter
 	 * @return mixed
 	 */
 	public function getFeed($url){
-         // create curl resource
-        $ch = curl_init();
+		// create curl resource
+		$ch = curl_init();
 
-        // set url
-        curl_setopt($ch, CURLOPT_URL, $url);
+		// set url
+		curl_setopt($ch, CURLOPT_URL, $url);
 
-        //return the transfer as a string
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		//return the transfer as a string
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
-        // $output contains the output string
-        $output = curl_exec($ch);
+		// $output contains the output string
+		$output = curl_exec($ch);
 
-        // close curl resource to free up system resources
-        curl_close($ch);
+		// close curl resource to free up system resources
+		curl_close($ch);
 
-        return $output;
+		return $output;
 	}
 
 	/**
@@ -59,11 +64,12 @@ class AbstractAdapter
 	 * @param array $params
 	 */
 	public function setParameters(array $params)
-    {
-        foreach ($params as $pName => $pValue) {
-            $this->setParameter($pName, $pValue);
-        }
-    }
+	{
+		foreach ($params as $pName => $pValue)
+		{
+			$this->setParameter($pName, $pValue);
+		}
+	}
 
 	/**
 	 * Sets a single parameter
@@ -72,9 +78,9 @@ class AbstractAdapter
 	 * @param string $value
 	 */
 	public function setParameter($name, $value)
-    {
-        $this->parameters[$name] = $value;
-    }
+	{
+		$this->parameters[$name] = $value;
+	}
 
 	/**
 	 * Gets a single parameter
@@ -82,25 +88,36 @@ class AbstractAdapter
 	 * @return string
 	 */
 	public function getParameters()
-    {
-        return $this->parameters;
-    }
+	{
+		return $this->parameters;
+	}
 
 	/**
-     * This method returns the parameters formatted for an HTTP request
-     *
-     * @return string
-     */
-    protected function getHttpParameters()
-    {
-        $glue = "&";
-        $htmlParams = "";
+	 * This method returns the parameters formatted for an HTTP request
+	 *
+	 * @return string
+	 */
+	protected function getHttpParameters()
+	{
+		$glue = '&';
+		$htmlParams = '';
 
-        $parameters = $this->getParameters();
-        foreach ($parameters as $name => $value) {
-            $htmlParams .= $name . '=' . str_replace(" ", '+', $value) . $glue;
-        }
+		$parameters = $this->getParameters();
+		foreach ($parameters as $name => $value)
+		{
+			$htmlParams .= $name . '=' . str_replace(' ', '+', $value) . $glue;
+		}
 
-        return substr($htmlParams, 0, -strlen($glue));
-    }
+		return substr($htmlParams, 0, -strlen($glue));
+	}
+
+	/**
+	 * Config setter
+	 *
+	 * @param array $config
+	 */
+	public function setConfig(array $config)
+	{
+		$this->config = $config;
+	}
 }

@@ -14,8 +14,10 @@ class MusicInfoManager
 {
 	protected $adapter;
 
-	public function __construct($adapter){
+	public function __construct($adapter, $container)
+	{
 		$this->adapter = new $adapter;
+		$this->adapter->setConfig($container->getParameter('nass600_media_info.config'));
 	}
 
 	/**
@@ -26,10 +28,11 @@ class MusicInfoManager
 	 * @return mixed
 	 */
 	public function getAlbumInfo(array $parameters)
-    {
-        if (!isset($parameters['format'])) {
-            $parameters['format'] = 'json';
-        }
+	{
+		if (!isset($parameters['format']))
+		{
+			$parameters['format'] = 'json';
+		}
 
 		$results = $this->adapter->getAlbumInfo($parameters);
 
@@ -46,10 +49,12 @@ class MusicInfoManager
 	 */
 	public function hasErrors($results)
 	{
-		try{
+		try
+		{
 			$lyrdb = new \SimpleXMLElement($results);
 		}
-		catch (\Exception $e){
+		catch (\Exception $e)
+		{
 			return false;
 		}
 

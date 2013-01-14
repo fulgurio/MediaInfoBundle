@@ -14,13 +14,11 @@ use Nass600\MediaInfoBundle\MediaInfo\Adapter\AbstractAdapter;
  */
 class LastFMAdapter extends AbstractAdapter implements AdapterInterface
 {
-//	const API_URL = "http://webservices.lyrdb.com/dev/function.php?parameters";
-	const API_URL = "http://ws.audioscrobbler.com/2.0/";
+//	const API_URL = 'http://webservices.lyrdb.com/dev/function.php?parameters';
+	const API_URL = 'http://ws.audioscrobbler.com/2.0/';
 
-    const API_KEY = "1fb73f684a6a41f4286ec94db6845e00";
-
-	const SEARCH_FUNCTION = "lookup";
-	const GET_FUNCTION = "album.getInfo";
+	const SEARCH_FUNCTION = 'lookup';
+	const GET_FUNCTION = 'album.getInfo';
 
 	protected $validFormats = array('text', 'xml', 'json');
 
@@ -40,11 +38,12 @@ class LastFMAdapter extends AbstractAdapter implements AdapterInterface
 	public function getAlbumInfo(array $parameters)
 	{
 		$this->setParameter('method', self::GET_FUNCTION);
-		$this->setParameter('api_key', self::API_KEY);
+		$this->setParameter('api_key', isset($this->config['lastFM']['api_key']) ? $this->config['lastFM']['api_key'] : NULL);
 
-        foreach ($parameters as $key => $value) {
-            $this->setParameter($key, $value);
-        }
+		foreach ($parameters as $key => $value)
+		{
+			$this->setParameter($key, $value);
+		}
 
 		$url = $this->getUrl();
 
@@ -66,9 +65,9 @@ class LastFMAdapter extends AbstractAdapter implements AdapterInterface
 	}
 
 	public function getUrl()
-    {
-        return self::API_URL."?{$this->getHttpParameters()}";
-    }
+	{
+		return self::API_URL."?{$this->getHttpParameters()}";
+	}
 
 	/**
 	 * Sets the output parameter for the url
@@ -79,8 +78,19 @@ class LastFMAdapter extends AbstractAdapter implements AdapterInterface
 	public function setOutputFormat($format)
 	{
 		if (!in_array($format, $this->validFormats))
+		{
 			throw new \Exception('Invalid output format');
+		}
 
 		$this->setParameter('format', $format);
+	}
+
+	/**
+	 * api_key setter
+	 * @param string $apiKey
+	 */
+	public function setApiKey($apiKey)
+	{
+		$this->api_key = $apiKey;
 	}
 }
