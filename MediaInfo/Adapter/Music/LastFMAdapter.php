@@ -84,13 +84,4 @@ class LastFMAdapter extends AbstractAdapter implements AdapterInterface
 
 		$this->setParameter('format', $format);
 	}
-
-	/**
-	 * api_key setter
-	 * @param string $apiKey
-	 */
-	public function setApiKey($apiKey)
-	{
-		$this->api_key = $apiKey;
-	}
 }
