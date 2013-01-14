@@ -49,10 +49,6 @@ class LastFMAdapter extends AbstractAdapter implements AdapterInterface
 		$url = $this->getUrl();
 
 		$data = $this->getFeed($url);
-echo "<pre>";
-var_dump(json_decode($data));
-echo "</pre>";
-die;
 		return $data;
 	}
 

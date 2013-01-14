@@ -3,7 +3,7 @@
     "type": "symfony-bundle",
     "description": "Symfony2 bundle for retrieving album, lyrics, movies info via REST API's",
     "keywords": ["symfony", "bundle", "lyrics", "music", "movies", "track", "rest"],
-    "homepage": "https://github.com/nass600/MediInfoBundle",
+    "homepage": "https://github.com/nass600/MediaInfoBundle",
     "license": "GNU",
     "authors": [
         {
