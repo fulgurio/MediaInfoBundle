@@ -1,5 +1,5 @@
 {
-    "name": "nass600/media-info-bundle",
+    "name": "fulgurio/media-info-bundle",
     "type": "symfony-bundle",
     "description": "Symfony2 bundle for retrieving album, lyrics, movies info via REST API's",
     "keywords": ["symfony", "bundle", "lyrics", "music", "movies", "track", "rest"],
