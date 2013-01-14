@@ -35,6 +35,12 @@ class LastFMAdapter extends AbstractAdapter implements AdapterInterface
 		return $data;
 	}
 
+	/**
+	 * Get album info
+	 *
+	 * @param array $parameters
+	 * @return string
+	 */
 	public function getAlbumInfo(array $parameters)
 	{
 		$this->setParameter('method', self::GET_FUNCTION);

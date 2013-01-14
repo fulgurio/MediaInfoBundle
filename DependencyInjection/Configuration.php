@@ -36,6 +36,13 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('api_key')->end()
                             ->end()
                         ->end()
+                        ->arrayNode('amazon')
+                            ->children()
+                                ->scalarNode('secret_key')->end()
+                                ->scalarNode('access_key_id')->end()
+                                ->scalarNode('associate_tag')->end()
+                            ->end()
+                        ->end()
                     ->end()
             ->end();
         return $treeBuilder;
