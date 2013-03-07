@@ -45,6 +45,7 @@ class LastFMAdapter extends AbstractAdapter implements AdapterInterface
 	{
 		$this->setParameter('method', self::GET_FUNCTION);
 		$this->setParameter('api_key', isset($this->config['lastFM']['api_key']) ? $this->config['lastFM']['api_key'] : NULL);
+		$this->setParameter('autocorrect', '1');
 
 		foreach ($parameters as $key => $value)
 		{
@@ -52,7 +53,6 @@ class LastFMAdapter extends AbstractAdapter implements AdapterInterface
 		}
 
 		$url = $this->getUrl();
-
 		$data = $this->getFeed($url);
 		return $data;
 	}
