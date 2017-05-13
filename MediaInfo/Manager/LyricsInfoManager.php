@@ -5,8 +5,8 @@ namespace Nass600\MediaInfoBundle\MediaInfo\Manager;
 /**
  * LyricsInfoManager
  *
- * @package Nass600LyricsBundle
- * @subpackage Model
+ * @package MediaInfoBundle
+ * @subpackage Manager
  * @author Ignacio Velázquez Gómez <ivelazquez85@gmail.com>
  * @copyright Ignacio Velázquez Gómez
  */

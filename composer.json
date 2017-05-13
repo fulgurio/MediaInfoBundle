@@ -10,11 +10,14 @@
             "name": "Ignacio Velazquez",
             "email": "ivelazquez85@gmail.com",
             "homepage": "http://www.ignaciovelazquez.es"
+        },
+        {
+          "name": "Fulgurio",
+          "homepage": "http://fulgurio.net"
         }
     ],
     "require": {
-        "php":                       ">=5.3.2",
-        "symfony/framework-bundle":  ">=2.0.0"
+        "symfony/framework-bundle":  ">=2.7"
     },
     "autoload": {
         "psr-0": { "Nass600\\MediaInfoBundle": "" }

@@ -2,62 +2,48 @@
 
 namespace Nass600\MediaInfoBundle\MediaInfo\Manager;
 
+use Nass600\MediaInfoBundle\MediaInfo\Adapter\AbstractAdapter;
+
 /**
  * MusicInfoManager
  *
- * @package Nass600LyricsBundle
- * @subpackage Model
+ * @package Nass600MediaInfoBundle
+ * @subpackage Manager
  * @author Ignacio Velázquez Gómez <ivelazquez85@gmail.com>
  * @copyright Ignacio Velázquez Gómez
  */
-class MusicInfoManager
-{
-	protected $adapter;
+class MusicInfoManager {
+    /**
+     * @var AbstractAdapter
+     */
+    protected $adapter;
 
-	public function __construct($adapter, $container)
-	{
-		$this->adapter = new $adapter;
-		$this->adapter->setConfig($container->getParameter('nass600_media_info.config'));
-	}
+    /**
+     * MusicInfoManager constructor.
+     *
+     * @param string $adapter
+     * @param array $container
+     */
+    public function __construct($adapter, $config) {
+        $this->adapter = new $adapter;
+        $this->adapter->setConfig($config);
+    }
 
-	/**
-	 * Gets the lyrics through the adapter API given the track $id and outputs the result in the given $format
-	 *
-	 * @param string $id
-	 * @param string $format
-	 * @return mixed
-	 */
-	public function getAlbumInfo(array $parameters)
-	{
-		if (!isset($parameters['format']))
-		{
-			$parameters['format'] = 'json';
-		}
-
-		$results = $this->adapter->getAlbumInfo($parameters);
-
-		$errors = $this->hasErrors($results);
-
-		return (!$errors) ? $results : null;
-	}
-
-	/**
-	 * Checks that response does not contain any errors
-	 *
-	 * @param $results
-	 * @return bool
-	 */
-	public function hasErrors($results)
-	{
-		try
-		{
-			$lyrdb = new \SimpleXMLElement($results);
-		}
-		catch (\Exception $e)
-		{
-			return false;
-		}
-
-		return ($lyrdb->error->number == null) ? false : true;
-	}
+    /**
+     * Gets the music album data through the adapter API given the track $id and outputs the result in the given $format
+     *
+     * @param array $parameters
+     *
+     * @return mixed
+     */
+    public function getAlbumInfo(array $parameters) {
+        try {
+            return $this->adapter->getAlbumInfo($parameters);
+        }
+        catch (\Exception $e) {
+            echo $e->getMessage();
+            // @todo: log
+            return null;
+        }
+    }
 }
